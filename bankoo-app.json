@@ -1,0 +1,12 @@
+{
+  "related_applications": [{
+    "platform": "play",
+    "id": "",
+    "min_version": "1",
+    "fingerprints": [{
+      "type": "",
+      "value": ""
+    }],
+    "url": "https://oceanhuang.github.io/bankoo"
+  }]
+}

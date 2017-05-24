@@ -1,0 +1,61 @@
+<<!DOCTYPE html>
+<html>
+<head>
+    <title>W3C Payment Handler API Test</title>
+    <script type="text/javascript">
+        function initPaymentRequest() {
+          let supportedInstruments = [{
+            supportedMethods: ['https://oceanhuang.github.io/bankoo/'],
+            data: {
+              merchantName: 'W3C Payment Handler API Test',
+              customKey: 'customValue'
+            },
+          }];
+
+          let details = {
+            total: {label: 'Donation', amount: {currency: 'USD', value: '55.00'}},
+            displayItems: [
+              {
+                label: 'Original donation amount',
+                amount: {currency: 'USD', value: '65.00'},
+              },
+              {
+                label: 'Friends and family discount',
+                amount: {currency: 'USD', value: '-10.00'},
+              },
+            ],
+          };
+
+          return new PaymentRequest(supportedInstruments, details);
+        }
+
+        /**
+         * Invokes PaymentRequest for Android Pay.
+         *
+         * @param {PaymentRequest} request The PaymentRequest object.
+         */
+        function onBuyClicked(request) {
+          request.show().then(function(instrumentResponse) {
+            console.log(instrumentResponse);
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
+        }
+
+        const payButton = document.getElementById('buyButton');
+        payButton.setAttribute('style', 'display: none;');
+        if (window.PaymentRequest) {
+          let request = initPaymentRequest();
+          payButton.setAttribute('style', 'display: inline;');
+          payButton.addEventListener('click', function() {
+            onBuyClicked(request);
+            request = initPaymentRequest();
+          });
+        }
+    </script>
+</head>
+<body>
+    <div><button id="buyButton">Buy</button></div>
+</body>
+</html>

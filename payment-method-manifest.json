@@ -1,3 +1,4 @@
 {
-  "supported_origins" : "*"
+  "supported_origins" : "*",
+  "default_applications": ["https://oceanhuang.github.io/bankoo/bankoo-app.json"]
 }

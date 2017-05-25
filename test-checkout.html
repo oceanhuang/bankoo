@@ -39,12 +39,30 @@
          */
         function onBuyClicked(request) {
           request.show().then(function(instrumentResponse) {
-            console.log(instrumentResponse);
+            instrumentResponse.complete('success')
+              .then(function() {
+                document.getElementById('result').innerHTML =
+                  instrumentToJsonString(instrumentResponse);
+              }).catch(function(err) {
+                  console.log(err);
+              });
           })
           .catch(function(err) {
             console.log(err);
           });
         }
+        
+        function instrumentToJsonString(instrument) {
+          if (instrument.toJSON) {
+            return JSON.stringify(instrument, undefined, 2);
+          } else {
+            return JSON.stringify({
+              methodName: instrument.methodName,
+              details: instrument.details,
+            }, undefined, 2);
+          }
+        }
+
         
         const payButton = document.getElementById('buyButton');
         payButton.setAttribute('style', 'display: none;');

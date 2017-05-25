@@ -1,7 +1,7 @@
 # bankoo
 Trying Chrome's implementation of [W3C Payment Handler API spec](https://www.w3.org/TR/payment-handler/)
 
-You can find out more details about Chrome's implementation here [g.co/payappintegration](g.co/payappintegration). 
+You can find out more details about Chrome's implementation [here](https://g.co/payappintegration). 
 
 ## Demo (Chrome 60+)
 1. Make sure you have latest version of Chrome (At the time of writing, I tested on Chrome Dev 60.0.3107.3)

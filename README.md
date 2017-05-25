@@ -6,7 +6,7 @@ You can find out more details about Chrome's implementation here [g.co/payappint
 ## Demo (Chrome 60+)
 1. Make sure you have latest version of Chrome (At the time of writing, I tested on Chrome Dev 60.0.3107.3)
 2. Download the app-debug.apk to your Android device
-3. Open this [link](https://oceanhuang.github.io/bankoo/test-checkout.html) on Chrome
+3. Open [https://oceanhuang.github.io/bankoo/test-checkout.html](https://oceanhuang.github.io/bankoo/test-checkout.html) on Chrome
 4. You should see a `Buy` button
 5. Tapping the `Buy` button should bring up the Bankoo app. You should also see some info passed in as part of the JS
 6. Tapping the `Continue` button should navigate user back to Chrome. You should also see some info passed back from the app

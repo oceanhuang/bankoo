@@ -86,21 +86,12 @@
           }
         }
 
-        // Add onclick function for the CanMakePayment button
         const canMakePaymentButton = document.getElementById('canMakePaymentButton');
-        canMakePaymentButton.setAttribute('style', 'display: none;');
-        if (window.PaymentRequest) {
-          let request = initPaymentRequest();
-          payButton.setAttribute('style', 'display: inline;');
-          payButton.addEventListener('click', function() {
-            onBuyClicked(request);
-            request = initPaymentRequest();
-          });
-        }
-
-        // Add onclick function for Buy button
         const payButton = document.getElementById('buyButton');
+        
+        canMakePaymentButton.setAttribute('style', 'display: none;');
         payButton.setAttribute('style', 'display: none;');
+
         if (window.PaymentRequest) {
           let request = initPaymentRequest();
           payButton.setAttribute('style', 'display: inline;');

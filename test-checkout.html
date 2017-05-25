@@ -4,6 +4,8 @@
     <title>W3C Payment Handler API Test</title>
 </head>
 <body>
+    <div><button id="canMakePaymentButton">CanMakePayment</button></div>
+    <div><pre id="canMakePaymentResult"></pre></div>
     <div><button id="buyButton">Buy</button></div>
     <div><pre id="result"></pre></div>
     <script type="text/javascript">
@@ -34,11 +36,12 @@
         }
 
         /**
-         * Invokes PaymentRequest for Android Pay.
+         * Invokes PaymentRequest.
          *
          * @param {PaymentRequest} request The PaymentRequest object.
          */
         function onBuyClicked(request) {
+          document.getElementById('result').innerHTML = "";
           request.show().then(function(instrumentResponse) {
             instrumentResponse.complete('success')
               .then(function() {
@@ -52,6 +55,25 @@
             console.log(err);
           });
         }
+
+        /**
+         * Invokes canMakePayment
+         *
+         * @param {PaymentRequest} request The PaymentRequest object.
+         */
+        function onCanMakePaymentButtonClicked(request) {
+          document.getElementById('canMakePaymentResult').innerHTML = "";
+          if (request.canMakePayment) {
+            request.canMakePayment().then(function(result) {
+              if (!result) {  
+                document.getElementById('canMakePaymentResult').innerHTML = "false";
+              }
+              document.getElementById('canMakePaymentResult').innerHTML = "true";
+            }).catch(function(err) {
+              console.log(err);
+            });
+          }
+        }
         
         function instrumentToJsonString(instrument) {
           if (instrument.toJSON) {
@@ -64,9 +86,9 @@
           }
         }
 
-        
-        const payButton = document.getElementById('buyButton');
-        payButton.setAttribute('style', 'display: none;');
+        // Add onclick function for the CanMakePayment button
+        const canMakePaymentButton = document.getElementById('canMakePaymentButton');
+        canMakePaymentButton.setAttribute('style', 'display: none;');
         if (window.PaymentRequest) {
           let request = initPaymentRequest();
           payButton.setAttribute('style', 'display: inline;');
@@ -75,6 +97,26 @@
             request = initPaymentRequest();
           });
         }
+
+        // Add onclick function for Buy button
+        const payButton = document.getElementById('buyButton');
+        payButton.setAttribute('style', 'display: none;');
+        if (window.PaymentRequest) {
+          let request = initPaymentRequest();
+          payButton.setAttribute('style', 'display: inline;');
+          canMakePaymentButton.setAttribute('style', 'display: inline;');
+          
+          canMakePaymentButton.addEventListener('click', function() {
+            onCanMakePaymentButtonClicked(request);
+          });
+
+          payButton.addEventListener('click', function() {
+            onBuyClicked(request);
+            request = initPaymentRequest();
+          });
+        }
+
+
     </script>    
 </body>
 </html>

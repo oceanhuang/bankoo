@@ -15,11 +15,11 @@
     <script type="text/javascript">
         function initPaymentRequest() {
           var checkedValue = []; 
-            var inputElements = document.getElementsByClassName('messageCheckbox');
-              for(var i=0; inputElements[i]; ++i){
-                if(inputElements[i].checked){
-                  checkedValue.push(inputElements[i].value);
-              }
+          var inputElements = document.getElementsByClassName('messageCheckbox');
+          for(var i=0; inputElements[i]; ++i){
+            if(inputElements[i].checked){
+                checkedValue.push(inputElements[i].value);
+            }
           }
             
           let supportedInstruments = [{
@@ -77,10 +77,7 @@
           document.getElementById('canMakePaymentResult').innerHTML = "";
           if (request.canMakePayment) {
             request.canMakePayment().then(function(result) {
-              if (!result) {  
-                document.getElementById('canMakePaymentResult').innerHTML = "false";
-              }
-              document.getElementById('canMakePaymentResult').innerHTML = "true";
+              document.getElementById('canMakePaymentResult').innerHTML = result;
             }).catch(function(err) {
               console.log(err);
             });

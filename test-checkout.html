@@ -105,17 +105,17 @@
         payButton.setAttribute('style', 'display: none;');
 
         if (window.PaymentRequest) {
-          let request = initPaymentRequest();
           payButton.setAttribute('style', 'display: inline;');
           canMakePaymentButton.setAttribute('style', 'display: inline;');
           
           canMakePaymentButton.addEventListener('click', function() {
+            let request = initPaymentRequest();
             onCanMakePaymentButtonClicked(request);
           });
 
           payButton.addEventListener('click', function() {
+            let request = initPaymentRequest();
             onBuyClicked(request);
-            request = initPaymentRequest();
           });
         }
 

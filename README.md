@@ -5,7 +5,7 @@ You can find out more details about Chrome's implementation [here](https://g.co/
 
 ## Demo (Chrome 60+)
 1. Make sure you have latest version of Chrome (At the time of writing, I tested on Chrome Dev 60.0.3107.3)
-2. Enable this flag: chrome://flags/#enable-experimental-web-platform-features
+2. Enable this flag: `chrome://flags/#enable-experimental-web-platform-features`
 2. Download the app-debug.apk to your Android device
 3. Open [https://oceanhuang.github.io/bankoo/test-checkout.html](https://oceanhuang.github.io/bankoo/test-checkout.html) on Chrome
 4. You should see a `Buy` button

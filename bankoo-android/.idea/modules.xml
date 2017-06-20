@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/bankoo.iml" filepath="$PROJECT_DIR$/bankoo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bankoo-android.iml" filepath="$PROJECT_DIR$/bankoo-android.iml" />
     </modules>
   </component>
 </project>

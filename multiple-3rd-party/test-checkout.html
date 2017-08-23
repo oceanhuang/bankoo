@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>W3C Payment Handler API Test - multiple 3rd party app</title>
+</head>
+<body>
+    
+    <div><button id="canMakePaymentButton">CanMakePayment</button></div>
+    <div><pre id="canMakePaymentResult"></pre></div>
+    
+    <div><button id="buyButton">Buy</button></div>
+    <div><pre id="result"></pre></div>
+    
+    <script type="text/javascript">
+        function initPaymentRequest() {
+            
+          let supportedInstruments = [{
+            supportedMethods: ["https://oceanhuang-github-io-bankoo.herokuapp.com/"],
+            data: {
+              merchantName: 'Display name of merchant',
+              customKey: 'customValue'
+            },
+          }];
+
+          let details = {
+            total: {label: 'Donation', amount: {currency: 'USD', value: '55.00'}},
+            displayItems: [
+              {
+                label: 'Original donation amount',
+                amount: {currency: 'USD', value: '65.00'},
+              },
+              {
+                label: 'Friends and family discount',
+                amount: {currency: 'USD', value: '-10.00'},
+              },
+            ],
+          };
+
+          return new PaymentRequest(supportedInstruments, details);
+        }
+
+        /**
+         * Invokes PaymentRequest.
+         *
+         * @param {PaymentRequest} request The PaymentRequest object.
+         */
+        function onBuyClicked(request) {
+          document.getElementById('result').innerHTML = "";
+          request.show().then(function(instrumentResponse) {
+            instrumentResponse.complete('success')
+              .then(function() {
+                document.getElementById('result').innerHTML =
+                  instrumentToJsonString(instrumentResponse);
+              }).catch(function(err) {
+                  console.log(err);
+              });
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
+        }
+
+        /**
+         * Invokes canMakePayment
+         *
+         * @param {PaymentRequest} request The PaymentRequest object.
+         */
+        function onCanMakePaymentButtonClicked(request) {
+          document.getElementById('canMakePaymentResult').innerHTML = "";
+          if (request.canMakePayment) {
+            request.canMakePayment().then(function(result) {
+              document.getElementById('canMakePaymentResult').innerHTML = result;
+            }).catch(function(err) {
+              console.log(err);
+            });
+          }
+        }
+        
+        function instrumentToJsonString(instrument) {
+          if (instrument.toJSON) {
+            return JSON.stringify(instrument, undefined, 2);
+          } else {
+            return JSON.stringify({
+              methodName: instrument.methodName,
+              details: instrument.details,
+            }, undefined, 2);
+          }
+        }
+
+        const canMakePaymentButton = document.getElementById('canMakePaymentButton');
+        const payButton = document.getElementById('buyButton');
+        
+        canMakePaymentButton.setAttribute('style', 'display: none;');
+        payButton.setAttribute('style', 'display: none;');
+
+        if (window.PaymentRequest) {
+          payButton.setAttribute('style', 'display: inline;');
+          canMakePaymentButton.setAttribute('style', 'display: inline;');
+          
+          canMakePaymentButton.addEventListener('click', function() {
+            let request = initPaymentRequest();
+            onCanMakePaymentButtonClicked(request);
+          });
+
+          payButton.addEventListener('click', function() {
+            let request = initPaymentRequest();
+            onBuyClicked(request);
+          });
+        }
+
+
+    </script>    
+</body>
+</html>

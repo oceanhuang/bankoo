@@ -1,29 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>W3C Payment Handler API Test</title>
+    <title>W3C Payment Handler API Test - multiple 3rd party app</title>
 </head>
 <body>
-    <input class="messageCheckbox" type="checkbox" value="basic-card" name="basic-card" checked> basic-card<br>
-    <input class="messageCheckbox" type="checkbox" value="https://oceanhuang-github-io-bankoo.herokuapp.com" name="3rd-party" checked> 3rd-party<br>
     
     <div><button id="canMakePaymentButton">CanMakePayment</button></div>
     <div><pre id="canMakePaymentResult"></pre></div>
     
     <div><button id="buyButton">Buy</button></div>
     <div><pre id="result"></pre></div>
+    
     <script type="text/javascript">
         function initPaymentRequest() {
-          var checkedValue = []; 
-          var inputElements = document.getElementsByClassName('messageCheckbox');
-          for(var i=0; inputElements[i]; ++i){
-            if(inputElements[i].checked){
-                checkedValue.push(inputElements[i].value);
-            }
-          }
             
           let supportedInstruments = [{
-            supportedMethods: checkedValue,
+            supportedMethods: ["https://oceanhuang-partnerone.herokuapp.com"],
             data: {
               merchantName: 'Display name of merchant',
               customKey: 'customValue'

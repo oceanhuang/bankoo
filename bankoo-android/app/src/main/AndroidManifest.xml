@@ -29,7 +29,10 @@
 
             <meta-data
                 android:name="org.chromium.default_payment_method_name"
-                android:value="https://oceanhuang-github-io-bankoo.herokuapp.com/" />
+                android:value="https://masterpass-payment-api.herokuapp.com/" />
+            <meta-data
+                android:name="org.chromium.payment_method_names"
+                android:resource="@array/method_names" />
         </activity>
     </application>
 
